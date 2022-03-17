@@ -191,13 +191,13 @@ export const login = async(req, res) => {
                     Token: token
                 });
             } else {
-                res.status(400).json({ Error: "Wrong Password!!" });
+                res.status(403).json({ Error: "Wrong Password!!" });
             }
         } else {
-            res.status(401).json({ Error: "User does not exist!!" });
+            res.status(404).json({ Error: "User does not exist!!" });
         }
     } catch (error) {
-        res.status(404).json({
+        res.status(500).json({
             Status: "FAIL",
             Message: "Failed to login!!",
             //Error: error.stack
