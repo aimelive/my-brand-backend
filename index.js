@@ -4,13 +4,14 @@ import messageRouter from "./src/routes/messageRoutes.js"
 import blogRouter from "./src/routes/blogRoutes.js"
 import commentRouter from "./src/routes/commentRoutes.js"
 import subscriptionRouter from "./src/Subscriptions/subscription.routes.js"
+import cors from "cors"
 
 
 const app = express();
 
 app.use(express.json());
 
-//app.use(cors())
+app.use(cors())
 
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/blogs", blogRouter)
