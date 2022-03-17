@@ -187,6 +187,7 @@ export const login = async(req, res) => {
                 const token = jwt.sign({ email: user.email, name: user.name, _id: user._id, role: user.role }, 'AIMELIVE APP')
                 res.status(200).json({
                     Message: `Welcome ${user.name} , You're Successfully logged in!`,
+                    Role: user.role,
                     Token: token
                 });
             } else {
