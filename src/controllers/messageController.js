@@ -25,12 +25,12 @@ export const getAllMessages = async(req, res) => {
     try {
         const messages = await Messages.find()
         res.status(200).json({
-            Status: "Success",
-            Results: ` ${messages.length} Messages`,
-            Data: { messages }
+                Status: "Success",
+                Results: ` ${messages.length} Messages`,
+                Data: { messages }
 
-        })
-        console.log(messages)
+            })
+            //console.log(messages)
     } catch (error) {
         res.status(500).json({
             Status: "Fail",

@@ -149,6 +149,26 @@ export const updatePassword = async(req, res) => {
 
 }
 
+//getting informations of one user 
+export const getUserInfo = async(req, res) => {
+    const userId = req.user._id;
+    // console.log(userId)
+    try {
+        const OneUser = await User.findOne({ _id: userId });
+        if (!OneUser)
+            return res.status(404).json({ Error: `User with this Id:  ${userId} doesn't exit` });
+        res.status(200).json({
+            Message: "User retrevied succcessfully",
+            Data: OneUser,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal Server error",
+        });
+        console.log(error);
+    }
+};
+
 
 
 export const deleteUser = async(req, res) => {
