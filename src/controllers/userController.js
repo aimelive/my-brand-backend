@@ -11,7 +11,7 @@ export const createUser = async(req, res) => {
         })
         if (emailExist.length) {
             res.status(400).json({
-                Message: `User <${email}> exists!!`
+                Error: `User <${email}> exists!!`
             })
         } else {
 

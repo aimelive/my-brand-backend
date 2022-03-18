@@ -11,19 +11,19 @@ const signupValidator = (req, res, next) => {
 
 
     if (!email) {
-        return res.json({ Error: 'Email missing!' });
+        return res.status(400).json({ Error: 'Email missing!' });
     }
     if (!name) {
-        return res.json({ Error: 'Name missing!' });
+        return res.status(400).json({ Error: 'Name missing!' });
     }
     if (name.length < 5) {
-        return res.json({ Error: 'Enter at least 5 characters!' });
+        return res.status(400).json({ Error: 'Enter at least 5 characters!' });
     }
     if (!pwd) {
-        return res.json({ Error: 'Password missing!' });
+        return res.status(400).json({ Error: 'Password missing!' });
     }
     if (!confirm) {
-        return res.json({ Error: 'Please confirm password!' });
+        return res.status(400).json({ Error: 'Please confirm password!' });
     }
 
     if (email != "") {
@@ -31,7 +31,7 @@ const signupValidator = (req, res, next) => {
         dotpos = email.lastIndexOf(".");
 
         if (atpos < 1 || (dotpos - atpos < 2)) {
-            return res.json({ Error: 'Incorrect email!' });
+            return res.status(400).json({ Error: 'Incorrect email!' });
         }
 
     }
@@ -39,13 +39,13 @@ const signupValidator = (req, res, next) => {
     if (pwd != "" && confirm != "") {
         if (pwd !== confirm) {
 
-            return res.json({ Error: 'Password does not match!' });
+            return res.status(400).json({ Error: 'Password does not match!' });
         }
 
     }
 
     if (pwd.length < 8) {
-        return res.json({ Error: 'Enter at least 8 characters' });
+        return res.status(400).json({ Error: 'Enter at least 8 characters' });
     }
     try {
         let tel = req.body.phone
