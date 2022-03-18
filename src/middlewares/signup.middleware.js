@@ -17,7 +17,7 @@ const signupValidator = (req, res, next) => {
         return res.json({ Error: 'Name missing!' });
     }
     if (name.length < 5) {
-        return res.json({ Name: 'Enter at least 5 characters!' });
+        return res.json({ Error: 'Enter at least 5 characters!' });
     }
     if (!pwd) {
         return res.json({ Error: 'Password missing!' });
@@ -45,7 +45,7 @@ const signupValidator = (req, res, next) => {
     }
 
     if (pwd.length < 8) {
-        return res.json({ Password: 'Enter at least 8 characters' });
+        return res.json({ Error: 'Enter at least 8 characters' });
     }
     try {
         let tel = req.body.phone

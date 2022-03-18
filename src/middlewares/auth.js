@@ -29,7 +29,7 @@ export const protect = async(req, res, next) => {
 
     } catch (error) {
         res.status(401).json({
-            Message: "Token required!!",
+            Message: "Login first!!",
             //Error: error.stack
         })
     }

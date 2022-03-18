@@ -11,7 +11,7 @@ router.route("/").get(protect, restrictTo('admin'), getAllUsers)
 
 router.route("/login").post(login)
 
-router.route("/signup").post(createUser)
+router.route("/signup").post(signup, createUser)
 
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser)
 
