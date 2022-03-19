@@ -15,18 +15,13 @@ export const addSubscription = async(req, res) => {
             const Subscriber = await subscription.create(req.body)
             res.status(201).json({
                 Congratulation: "Subscription Added Successfully!!",
-                Data: { Subscriber }
+                Data: Subscriber
 
             })
 
         }
 
-    } catch (error) {
-        res.status(400).json({
-            Message: "An error occured!!",
-            //Error: error.stack
-        })
-    }
+    } catch (error) {}
 }
 
 export const getSubscription = async(req, res) => {
