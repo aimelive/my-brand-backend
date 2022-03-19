@@ -8,7 +8,7 @@ export const addSubscription = async(req, res) => {
             email: email.toLowerCase()
         })
         if (emailExist.length) {
-            res.status(400).json({
+            res.status(409).json({
                 Message: `Subscription <${email}> exists!!`
             })
         } else {
