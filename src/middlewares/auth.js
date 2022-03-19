@@ -6,7 +6,7 @@ export const protect = async(req, res, next) => {
     let token
     try {
         if (!req.headers.authorization) {
-            return res.status(404).json({
+            return res.status(400).json({
                 Message: "LOGIN FIRST!!",
                 //Error: error.stack
             })
@@ -30,7 +30,7 @@ export const protect = async(req, res, next) => {
 
     } catch (error) {
         res.status(500).json({
-            Message: "TOKEN REQUIRED!!",
+            Message: "AN ERROR OCCURED, TOKEN ERROR!!",
             //Error: error.stack
         })
     }
