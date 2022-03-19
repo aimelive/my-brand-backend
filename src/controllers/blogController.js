@@ -41,7 +41,7 @@ export const createBlog = async(req, res) => {
 
 export const getAllBlogs = async(req, res) => {
     try {
-        const blogs = await Blog.find()
+        const blogs = await Blog.find().sort({ dateCreated: -1 })
         res.status(200).json({
             Status: "All blogs in the database retrieved successfully",
             Number_of_blogs: blogs.length,
