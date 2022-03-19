@@ -5,31 +5,32 @@ export const protect = async(req, res, next) => {
 
     let token
     try {
-
+        if (!req.headers.authorization) {
+            return res.status(404).json({
+                Message: "LOGIN FIRST!!",
+                //Error: error.stack
+            })
+        }
         if (req.headers.authorization.startsWith('Bearer')) {
             token = req.headers.authorization.split(' ')[1]
-        }
-
-        if (!token) {
-            return res.status(401).json({ Message: 'Login first' })
         }
         try {
 
             const decoded = await promisify(jwt.verify)(token, 'AIMELIVE APP')
             const freshUser = await User.findById(decoded._id)
             if (!freshUser) {
-                return res.status(401).json({ Message: 'User not found' })
+                return res.status(404).json({ Message: 'User not found' })
             }
 
             req.user = freshUser
 
         } catch (error) {
-            return res.status(401).json({ Message: 'Login first' })
+            return res.status(400).json({ Message: 'FAILED TO DECODE A TOKEN' })
         }
 
     } catch (error) {
-        res.status(401).json({
-            Message: "Login first!!",
+        res.status(500).json({
+            Message: "TOKEN REQUIRED!!",
             //Error: error.stack
         })
     }
