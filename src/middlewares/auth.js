@@ -11,7 +11,9 @@ export const protect = async(req, res, next) => {
                 //Error: error.stack
             })
         }
-        token = req.headers.authorization.split(' ')[1]
+        if (req.headers.authorization.startsWith('Bearer')) {
+            token = req.headers.authorization.split(' ')[1]
+        }
         try {
 
             const decoded = await promisify(jwt.verify)(token, 'AIMELIVE APP')
