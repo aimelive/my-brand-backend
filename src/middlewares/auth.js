@@ -7,8 +7,7 @@ export const protect = async(req, res, next) => {
     try {
         if (!req.headers.authorization) {
             return res.status(400).json({
-                Message: "LOGIN FIRST!!",
-                Error: error.stack
+                Message: "LOGIN FIRST!!"
             })
         }
         if (req.headers.authorization.startsWith('Bearer')) {
