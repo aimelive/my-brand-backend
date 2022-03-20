@@ -5,12 +5,12 @@ export const protect = async(req, res, next) => {
 
     let token
     try {
-        if (!req.headers.authorization) {
-            return res.status(400).json({
-                Message: "LOGIN FIRST!!",
-                //Error: error.stack
-            })
-        }
+        // if (!req.headers.authorization) {
+        //     return res.status(400).json({
+        //         Message: "LOGIN FIRST!!",
+        //         //Error: error.stack
+        //     })
+        // }
         if (req.headers.authorization.startsWith('Bearer')) {
             token = req.headers.authorization.split(' ')[1]
         }
