@@ -31,7 +31,7 @@ export const protect = async(req, res, next) => {
     } catch (error) {
         res.status(500).json({
             Message: "AN ERROR OCCURED, TOKEN ERROR!!",
-            //Error: error.stack
+            Error: error.stack
         })
     }
 
