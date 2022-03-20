@@ -24,7 +24,7 @@ export const protect = async(req, res, next) => {
             req.user = freshUser
 
         } catch (error) {
-            return res.status(400).json({ Message: 'FAILED TO DECODE A TOKEN' })
+            return res.status(400).json({ Message: 'FAILED TO DECODE A TOKEN', Error: error.stack })
         }
 
     } catch (error) {
