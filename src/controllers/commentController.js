@@ -98,8 +98,11 @@ export const deleteComment = async(req, res) => {
             postID: blogId,
             _id: commentId
         })
+        const blog = await Blog.findById(blogId)
+        blog.comments.remove(commentId)
+        await blog.save()
         if (comment != null) {
-            res.status(200).json({
+            res.status(202).json({
                 Message: "Comment Deleted successfully!"
             })
         } else {
