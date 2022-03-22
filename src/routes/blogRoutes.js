@@ -6,7 +6,8 @@ const router = express.Router()
 
 
 router.route("/").get(getAllBlogs)
-router.post("/", protect, restrictTo('admin'), createBlog)
+
+// router.post("/", protect, restrictTo('admin'), createBlog)
 
 router.route("/:id").get(getBlog).patch(protect, restrictTo('admin'), updateBlog).delete(protect, restrictTo('admin'), deleteBlog)
 

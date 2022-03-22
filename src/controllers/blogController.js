@@ -1,6 +1,6 @@
 import Blog from "../models/blogModel.js"
 import Comment from "../models/commentModel.js"
-
+import { photo } from "../middlewares/About Photo/multer.js"
 export const createBlog = async(req, res) => {
     try {
 
@@ -17,7 +17,14 @@ export const createBlog = async(req, res) => {
                 ID: blog._id
             })
         } else {
-            const newBlog = await Blog.create(req.body)
+            req.body.imgURL = await photo(req)
+            const newBlog = await Blog.create({
+                title: req.body.title,
+                category: req.body.category,
+                preview: req.body.preview,
+                body: req.body.body,
+                imgURL: req.body.imgURL
+            })
             res.status(201).json({
                 Message: "New blog created sucessfully",
                 Content: { newBlog }
@@ -28,10 +35,10 @@ export const createBlog = async(req, res) => {
 
 
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             Status: "FAIL",
             Message: "Failed to add new blog!",
-            //Error: error.stack
+            Error: error
 
         })
     }
@@ -63,7 +70,7 @@ export const getBlog = async(req, res) => {
         const blog = await Blog.findById(req.params.id).populate("comments")
 
         res.status(200).json({
-            Message: `Blog retrieved successfully!`,
+            Message: `Blog retrieved successfully!!`,
             Title: blog.title,
             Content: { blog },
             //Comments: { comment }
