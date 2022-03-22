@@ -42,14 +42,14 @@ export const getAllComments = async(req, res) => {
             })
         } else {
             res.status(404).json({
-                Message: "No message yet!!",
+                Message: "No comment found!!",
 
             })
         }
 
     } catch (error) {
         res.status(500).json({
-            Message: "No message yet!!",
+            Message: "Invalid Blog ID!!",
             //Error: error.stack
 
         })
