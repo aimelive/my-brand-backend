@@ -5,6 +5,7 @@ import blogRouter from "./src/routes/blogRoutes.js"
 import commentRouter from "./src/routes/commentRoutes.js"
 import subscriptionRouter from "./src/Subscriptions/subscription.routes.js"
 import addBlogWithPhotoRouter from "./src/middlewares/About Photo/add.blog.route.js"
+import router from "./src/middlewares/About Photo/update.blog.route.js";
 import cors from "cors"
 
 
@@ -17,7 +18,7 @@ app.use(cors())
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/blogs", blogRouter)
 app.use("/api/v1/addBlog", addBlogWithPhotoRouter)
-app.use("/api/v1/updateBlog", addBlogWithPhotoRouter)
+app.use("/api/v1/updateBlog", router)
 app.use("/api/v1/messages", messageRouter)
 app.use("/api/v1/blogs", commentRouter)
 app.use("/api/v1/subscriptions", subscriptionRouter)
