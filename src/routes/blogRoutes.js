@@ -9,6 +9,6 @@ router.route("/").get(getAllBlogs)
 
 // router.post("/", protect, restrictTo('admin'), createBlog)
 
-router.route("/:id").get(getBlog).delete(protect, restrictTo('admin'), deleteBlog)
+router.route("/:id").get(getBlog).patch(protect, restrictTo('admin'), updateBlog).delete(protect, restrictTo('admin'), deleteBlog)
 
 export default router

@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import { protect, restrictTo } from "../auth.js"
-import { updateBlog } from "../../controllers/blogController.js"
+import { updateBlogPhto } from "../../controllers/blogController.js"
 
 const router = express.Router()
 
@@ -15,6 +15,6 @@ const fileFilter = (req, file, cb) => {
 };
 const upload = multer({ storage, fileFilter });
 
-router.patch("/:id", protect, restrictTo('admin'), upload.single("imgURL"), updateBlog);
+router.patch("/", protect, restrictTo('admin'), upload.single("imgURL"), updateBlogPhto);
 
 export default router

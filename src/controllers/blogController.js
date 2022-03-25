@@ -87,6 +87,31 @@ export const getBlog = async(req, res) => {
 
 export const updateBlog = async(req, res) => {
     try {
+        const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        })
+
+        const blogPost = await Blog.findByIdAndUpdate(req.params.id, { dateUpdated: Date.now() }, { new: true, runValidators: true });
+        //blogPost.comments.push(newComment)
+        await blogPost.save((e) => {
+            res.status(201).json({
+                Message: "Blog updated!",
+                Data: blogPost
+            })
+        })
+    } catch (error) {
+        res.status(404).json({
+            Oops: `A blog with an ID ${req.params.id} doesn't exist`
+        })
+    }
+
+}
+
+
+
+export const updateBlogPhto = async(req, res) => {
+    try {
         req.body.imgURL = await photo(req)
         const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
