@@ -15,6 +15,6 @@ const fileFilter = (req, file, cb) => {
 };
 const upload = multer({ storage, fileFilter });
 
-router.patch("/", protect, restrictTo('admin'), upload.single("imgURL"), updateBlogPhto);
+router.patch("/:id", protect, restrictTo('admin'), upload.single("imgURL"), updateBlogPhto);
 
 export default router
