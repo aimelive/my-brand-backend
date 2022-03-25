@@ -87,6 +87,7 @@ export const getBlog = async(req, res) => {
 
 export const updateBlog = async(req, res) => {
     try {
+        req.body.imgURL = await photo(req)
         const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
