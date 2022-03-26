@@ -120,15 +120,24 @@ export const updateBlogPhto = async(req, res) => {
 
         const blogPost = await Blog.findByIdAndUpdate(req.params.id, { dateUpdated: Date.now() }, { new: true, runValidators: true });
         //blogPost.comments.push(newComment)
-        await blogPost.save((e) => {
-            res.status(201).json({
-                Message: "Blog updated!",
-                Data: blogPost
+        if (blog) {
+            await blogPost.save((e) => {
+                res.status(201).json({
+                    Message: "Blog updated!",
+                    Data: blogPost
+                })
             })
-        })
+        } else {
+            res.status(404).json({
+                Message: "Failed to update!!",
+                Oops: `A blog with an ID ${req.params.id} doesn't exist`
+            })
+        }
+
     } catch (error) {
-        res.status(404).json({
-            Oops: `A blog with an ID ${req.params.id} doesn't exist`
+        res.status(500).json({
+            Message: "Failed to update!!",
+            Error: error.stack
         })
     }
 
