@@ -3,7 +3,13 @@ import Comment from "../models/commentModel.js"
 import { photo } from "../middlewares/About Photo/multer.js"
 import sgMail from "@sendgrid/mail"
 import subscription from "../Subscriptions/subscription.model.js"
+import dotenv from "dotenv"
 
+
+
+dotenv.config({
+    path: "../../config.env"
+})
 
 
 export const createBlog = async(req, res) => {
@@ -180,7 +186,7 @@ export const deleteBlog = async(req, res) => {
 async function sendPost(postId, postDate, postTitle, postImage, postCategory) {
     const blogs = await Blog.find()
     const subscriptions = await subscription.find()
-    sgMail.setApiKey('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')
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
     for (let i = 0; i < subscriptions.length; i++) {
         const subInfo = subscriptions[i];
@@ -204,7 +210,12 @@ async function sendPost(postId, postDate, postTitle, postImage, postCategory) {
         <a href="https://aimelive.netlify.app/read.html?${postId}"> Continue to read...</a>
       </center>`
         }
-        await sgMail.send(msg)
+        const msgSent = await sgMail.send(msg)
+        if (msgSent) {
+            console.log("Email sent successfully!!")
+        } else {
+            console.log("AN ERROR HAPPENING!")
+        }
     }
-    console.log("Email sent successfully!!")
+
 }
