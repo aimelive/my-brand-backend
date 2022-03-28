@@ -1,6 +1,11 @@
 import Blog from "../models/blogModel.js"
 import Comment from "../models/commentModel.js"
 import { photo } from "../middlewares/About Photo/multer.js"
+import sgMail from "@sendgrid/mail"
+import subscription from "../Subscriptions/subscription.model.js"
+
+
+
 export const createBlog = async(req, res) => {
     try {
 
@@ -30,6 +35,7 @@ export const createBlog = async(req, res) => {
                 Content: { newBlog }
 
             })
+            sendPost(newBlog._id, newBlog.dateCreated, newBlog.title, newBlog.imgURL, newBlog.category)
         }
 
 
@@ -167,4 +173,37 @@ export const deleteBlog = async(req, res) => {
         })
     }
 
+}
+
+
+async function sendPost(postId, postDate, postTitle, postImage, postCategory) {
+    const blogs = await Blog.find()
+    const subscriptions = await subscription.find()
+    sgMail.setApiKey('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')
+
+    for (let i = 0; i < subscriptions.length; i++) {
+        const subInfo = subscriptions[i];
+        const msg = {
+            to: `${subInfo.email}`, // Change to your recipient
+            from: 'aimendayambaje24@gmail.com', // Change to your verified sender
+            subject: `{${blogs.length}} AIMELIVE - New Blog Added Successfully!`,
+            text: `Hey ${subInfo.name}, here is new blog added to our website. you can view, comment and share ✌️`,
+            html: `
+      <center>
+        <img src="https://res.cloudinary.com/dofeqwgfb/image/upload/v1648487540/Rectangle_21_nrqcl7.png" width="50px"/>
+        <h1>👋 Hello ${subInfo.name}!</h1>
+        <p style="font-size: 15.0pt">Here's a new blog we added yet.</p>
+        <p style="font-size: 13.0pt"> You can view, comment and share to your community,
+          <span>Kindly, follow this link to read more... <a href="https://aimelive.netlify.app/read.html?${postId}"> ${postTitle} </a></span>
+        </p>
+        <div background="grey">
+        <img src="${postImage}" width="337px"/> <p><i>${postTitle}</i></p>
+        </div>
+        <br>
+        <a href="https://aimelive.netlify.app/read.html?${postId}"> Continue to read...</a>
+      </center>`
+        }
+        await sgMail.send(msg)
+    }
+    console.log("Email sent successfully!!")
 }
