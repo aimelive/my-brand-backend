@@ -27,7 +27,7 @@ export const addSubscription = async(req, res) => {
 export const getSubscription = async(req, res) => {
     try {
         const Subscriber = await subscription.find()
-        res.status(201).json({
+        res.status(200).json({
             Message: "ALL SUBSCRIPTIONS RETRIEVED!!",
             Results: Subscriber.length,
             Data: { Subscriber }
