@@ -192,7 +192,7 @@ async function sendPost(postId, postDate, postTitle, postImage, postCategory) {
         const subInfo = subscriptions[i];
         const msg = {
             to: `${subInfo.email}`, // Change to your recipient
-            from: 'aimendayambaje24@gmail.com', // Change to your verified sender
+            from: 'aimelive250@gmail.com', // Change to your verified sender
             subject: `{${blogs.length}} AIMELIVE - New Blog Added Successfully!`,
             text: `Hey ${subInfo.name}, here is new blog added to our website. you can view, comment and share ✌️`,
             html: `
