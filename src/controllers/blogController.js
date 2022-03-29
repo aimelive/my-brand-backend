@@ -53,7 +53,7 @@ export const createBlog = async(req, res) => {
         res.status(500).json({
             Status: "FAIL",
             Message: "Failed to add new blog!",
-            Error: error
+            Error: error.stack
 
         })
     }
