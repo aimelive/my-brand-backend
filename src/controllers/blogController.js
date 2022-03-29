@@ -36,7 +36,9 @@ export const createBlog = async(req, res) => {
                 body: req.body.body,
                 imgURL: req.body.imgURL
             })
-            sendPost(newBlog._id, newBlog.dateCreated, newBlog.title, newBlog.imgURL, newBlog.category)
+
+            await sendPost(newBlog._id, newBlog.dateCreated, newBlog.title, newBlog.imgURL, newBlog.category)
+
             res.status(201).json({
                 Message: "New blog created sucessfully",
                 Content: { newBlog }
