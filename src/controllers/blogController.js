@@ -210,6 +210,9 @@ async function sendPost(postId, postDate, postTitle, postImage, postCategory) {
         </div>
         <br>
         <a href="https://aimelive.netlify.app/read.html?${postId}"> Continue to read...</a>
+        <p>Do you want to unsubscribe? Please use this form and contact Admin for help to remove you from the Subscribers List 
+        <a href="https://aimelive.netlify.app/contact.html"> Unsubscribe </a>
+        </p>
       </center>`
         }
         const msgSent = await sgMail.send(msg)
